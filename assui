@@ -1,0 +1,23 @@
+I'll clone the repo and search it for the elements page.
+
+The content is in the main **assistant-ui/assistant-ui** repo, not tool-ui. I cloned it and searched it. Here's where each part of that page lives:
+
+| What you see on the page | Folder in the repo |
+|---|---|
+| **The element components** (the actual code you'd use) | `packages/ui/src/components/react/assistant-ui/elements/` |
+| Docs text for each element | `apps/docs/content/elements/` (128 `.mdx` files) |
+| Live demos on the page | `apps/docs/components/demo/elements/` |
+| The catalog page itself (grid, "Add to cart") | `apps/docs/app/(catalog)/elements/page.tsx` |
+| List of what the install command pulls in | `apps/registry/src/registry.ts` |
+
+The first folder is the one to give your agent. It has about 139 components, such as `cost-meter.tsx`, `approval-card.tsx` and `agent-plan.tsx`, plus their tests. Each element is listed in `registry.ts` with its file name and a short description.
+
+To get just that folder without the whole repo:
+
+```bash
+git clone --depth 1 --filter=blob:none --sparse https://github.com/assistant-ui/assistant-ui.git
+cd assistant-ui
+git sparse-checkout set packages/ui/src/components/react/assistant-ui apps/docs/content/elements
+```
+
+That gives your agent the component code and the docs for each element side by side.
